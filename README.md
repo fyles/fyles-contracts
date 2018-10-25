@@ -15,7 +15,7 @@ Follow the README in the [fyles](https://github.com/marcdown/fyles) repo to try 
 Alternatively you can interact with the smart contract directly by using the following settings on https://www.myetherwallet.com/#contracts:
 * Network: Rinkeby
 * Contract Address: `0x`
-* ABI: Contents of `abi` in [FileStorage.json](/blob/master/build/contracts/FileStorage.json)
+* ABI: Contents of `abi` in [FileStorage.json](/build/contracts/FileStorage.json)
 
 ## Setup
 
