@@ -2,7 +2,7 @@
 
 Smart contracts for fyles, an IPFS-backed public filestore with support for Proof of Existence.
 
-[![Build Status](https://travis-ci.org/fyles/fyles-contracts.svg?branch=master)](https://travis-ci.org/fyles/fyles-contracts)
+[![Build Status](https://travis-ci.com/marcdown/fyles-contracts.svg?branch=master)](https://travis-ci.com/marcdown/fyles-contracts)
 
 ## About
 fyles is a web3-powered dApp that allows you to easily upload files to [IPFS](https://ipfs.io), a p2p distributed file system. The file hash is then stored in a smart contract associated with your wallet address, providing access to all of your files. This process allows for Proof of Existence, effectively proving the file existed at a certain point in time by attaching the same file hash to a transaction on the Ethereum blockchain.
@@ -10,12 +10,12 @@ fyles is a web3-powered dApp that allows you to easily upload files to [IPFS](ht
 You can read more about IPFS [here](https://hackernoon.com/a-beginners-guide-to-ipfs-20673fedd3f) and the concept of PoE [here](https://www.newsbtc.com/proof-of-existence).
 
 ## Usage
-Follow the README in the [fyles-web](https://github.com/fyles/fyles-web) repo to try it out locally.
+Follow the README in the [fyles](https://github.com/marcdown/fyles) repo to try it out locally.
 
 Alternatively you can interact with the smart contract directly by using the following settings on https://www.myetherwallet.com/#contracts:
 * Network: Rinkeby
 * Contract Address: `0x`
-* ABI: Contents of `abi` in [FileStorage.json](https://github.com/fyles/fyles-contracts/blob/master/build/contracts/FileStorage.json)
+* ABI: Contents of `abi` in [FileStorage.json](/blob/master/build/contracts/FileStorage.json)
 
 ## Setup
 
