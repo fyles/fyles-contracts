@@ -24,13 +24,7 @@ Install all dependencies.
 
 `$ yarn`
 
-### Truffle Framework
-Install [Truffle](https://truffleframework.com/truffle) and [Ganache](https://truffleframework.com/ganache) globally.
-
-```
-$ yarn global add truffle
-$ yarn global add ganache-cli
-```
+*Note: [Truffle](https://truffleframework.com/truffle) and [Ganache](https://truffleframework.com/ganache) will be automatically installed as dev dependencies.*
 
 ### Configure env variables
 
