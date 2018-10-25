@@ -18,7 +18,7 @@ matrix:
       - rm -rf node_modules
  
 install:
-  - bash ./bin/travis-install.sh
+  - yarn
  
 script:
-  - bash ./bin/test.sh
+  - bash ./scripts/test.sh
