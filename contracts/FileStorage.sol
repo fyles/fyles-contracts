@@ -10,6 +10,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
  *      delegated to the Ownable contract
  */
 contract FileStorage is Ownable  {
+    address private _owner;
 
     // Struct for file hashes and metadata
     struct Files {
@@ -33,6 +34,13 @@ contract FileStorage is Ownable  {
 
     // Event fired after adding a new file
     event AddedFile(address _sender, bytes32 _fileHash, bytes1 _hashFunction, bytes1 _hashSize, FileType _fileType);
+
+    // constructor
+    constructor() public {
+        // assign owner from Ownable contract
+        _owner = owner();
+    }
+
 
     /**
      * @dev Add a file to the contract
@@ -158,7 +166,7 @@ contract FileStorage is Ownable  {
      *      WARNING: This is an unrecoverable operation!
      */
     function kill() public onlyOwner {
-        selfdestruct(owner);
+        selfdestruct(_owner);
     }
     
     /**
