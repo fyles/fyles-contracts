@@ -10,7 +10,12 @@
     "truffle-solidity-loader": "0.1.0"
   },
   "devDependencies": {
+    "coveralls": "3.0.2",
     "ganache-cli": "6.1.8",
+    "solidity-coverage": "0.5.11",
     "truffle": "4.1.14"
+  },
+  "scripts": {
+    "coverage": "./node_modules/.bin/solidity-coverage"
   }
 }

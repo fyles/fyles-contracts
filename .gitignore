@@ -1,8 +1,12 @@
 # osx
 .DS_Store
 
-# node dependencies
-node_modules/
-
 # local env variables
 .env
+
+# code coverage
+coverage.json
+coverage/
+
+# node dependencies
+node_modules/
