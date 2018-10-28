@@ -16,6 +16,7 @@
     "truffle": "4.1.14"
   },
   "scripts": {
+    "test": "truffle test",
     "coverage": "./node_modules/.bin/solidity-coverage"
   }
 }
