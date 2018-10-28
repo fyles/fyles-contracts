@@ -1,4 +1,7 @@
+require('babel-register')
+require('babel-polyfill')
 require('dotenv').config();
+
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 module.exports = {
@@ -6,8 +9,6 @@ module.exports = {
         development: {
             host: "localhost",
             port: 8545,
-            gas: 6721975,
-            gasPrice: 20000000000,
             network_id: "*"
         },
         rinkeby: {
