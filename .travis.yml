@@ -7,4 +7,4 @@ install:
   - yarn
  
 script:
-  - bash ./scripts/test.sh
+  - yarn coverage && cat coverage/lcov.info | coveralls
