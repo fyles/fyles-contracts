@@ -37,12 +37,54 @@ contract('FileStorage', function ([owner]) {
     })
 
     /**
+     * @dev Test adding an invalid file hash
+     */
+    it('should fail when adding an invalid file hash', async function () {
+        try {
+            await fs.addFile(0x0, parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+    })
+
+    /**
      * @dev Test adding a new file hash object
      */
     it('adds a file hash object', async function () {
         await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
         let storedFileHash = await fs.getFileHash(0)
         assert.equal(storedFileHash, parseInt(file1Hash, 16), "File hashes should match.")
+    })
+
+    /**
+     * @dev Test adding an invalid file hash index
+     */
+    it('should fail when adding an invalid file hash index', async function () {
+        try {
+            await fs.addFile(parseInt(file1Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
+            await fs.getFileHash(1)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+    })
+
+    /**
+     * @dev Test adding an invalid file metadata
+     */
+    it('should fail when adding an invalid file metadata', async function () {
+        // Invalid hash function
+        try {
+            await fs.addFile(parseInt(file1Hash, 16), 0x0, parseInt(file2HashSize, 16), file2Type)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+
+        // Invalid hash size
+        try {
+            await fs.addFile(parseInt(file1Hash, 16), parseInt(file2HashFunction, 16), 0x0, file2Type)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
     })
 
     /**
@@ -63,6 +105,18 @@ contract('FileStorage', function ([owner]) {
         // File type
         let storedFileType = storedFileMetadata.substring(60, 62)
         assert.equal(storedFileType , file1Type, "File types should match.")
+    })
+
+    /**
+     * @dev Test adding an invalid file metadata index
+     */
+    it('should fail when adding an invalid file metadata index', async function () {
+        try {
+            await fs.addFile(parseInt(file1Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
+            await fs.getFileMetadata(1)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
     })
 
     /**
@@ -104,12 +158,60 @@ contract('FileStorage', function ([owner]) {
     })
 
     /**
+     * @dev Test returning file hashes for invalid address
+     */
+    it('should fail when returning file hashes for an invalid address', async function () {
+        await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
+        try {
+            await fs.getFileHashesForAddress(0x0)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+    })
+
+    /**
+     * @dev Test returning file hashes for a given address
+     */
+    it('returns file hashes for a given address', async function () {
+        await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
+        await fs.addFile(parseInt(file2Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
+        let storedFileHashes = await fs.getFileHashesForAddress(owner)
+
+        assert.equal(storedFileHashes[0], parseInt(file1Hash, 16), "File hash at index 0 should match first file.")
+        assert.equal(storedFileHashes[1], parseInt(file2Hash, 16), "File hash at index 1 should match first file.")
+    })
+
+    /**
      * @dev Test returning the correct file metadata objects
      */
     it('returns the correct file metadata objects', async function () {
         await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
         await fs.addFile(parseInt(file2Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
         let storedFileMetadata = await fs.getAllFileMetadata()
+
+        assert.equal(storedFileMetadata[0], parseInt(file1Metadata, 16), "File metadata at index 0 should match first file.")
+        assert.equal(storedFileMetadata[1], parseInt(file2Metadata, 16), "File metadata at index 1 should match first file.")
+    })
+
+    /**
+     * @dev Test returning file metadata for invalid address
+     */
+    it('should fail when returning file metadata for an invalid address', async function () {
+        await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
+        try {
+            await fs.getFileMetadataForAddress(0x0)
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+    })
+
+    /**
+     * @dev Test returning file metadata for a given address
+     */
+    it('returns file metadata for a given address', async function () {
+        await fs.addFile(parseInt(file1Hash, 16), parseInt(file1HashFunction, 16), parseInt(file1HashSize, 16), file1Type)
+        await fs.addFile(parseInt(file2Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
+        let storedFileMetadata = await fs.getFileMetadataForAddress(owner)
 
         assert.equal(storedFileMetadata[0], parseInt(file1Metadata, 16), "File metadata at index 0 should match first file.")
         assert.equal(storedFileMetadata[1], parseInt(file2Metadata, 16), "File metadata at index 1 should match first file.")
