@@ -130,9 +130,8 @@ contract('FileStorage', function ([owner]) {
 
         try {
             await fs.addFile(parseInt(file2Hash, 16), parseInt(file2HashFunction, 16), parseInt(file2HashSize, 16), file2Type)
-            assert.fail()
         } catch (err) {
-            assert(err.toString().includes('Contract must be accepting new files'), err.toString())
+            assert(err.toString().includes('revert'), err.toString())
         }
 
         // Enable adding new files
