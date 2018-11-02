@@ -7,4 +7,5 @@ install:
   - yarn
  
 script:
+  - yarn solium
   - yarn coverage && cat coverage/lcov.info | coveralls
