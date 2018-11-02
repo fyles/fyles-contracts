@@ -173,6 +173,6 @@ contract FileStorage is Ownable  {
      * @dev Fallback function
      */
     function () public payable {
-        revert();
+        revert("Command not found");
     }
 }
