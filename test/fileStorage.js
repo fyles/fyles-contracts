@@ -245,4 +245,16 @@ contract('FileStorage', function ([owner]) {
         assert.equal(storedFileHashCount, 2, "File hash count should be 2.")
         assert.equal(storedFileMetadataCount, 2, "File metadata count should be 2.")
     })
+
+    /**
+     * Test ability to self destruct
+     */
+    it('self destructs the contract', async function() {
+        let address = await fs.address
+        let contractByteCode = await web3.eth.getCode(address)
+        await fs.kill()
+        let emptyByteCode = await web3.eth.getCode(address)
+        assert.notEqual(contractByteCode, emptyByteCode, "Previous and current contract bytecode should not be equal.")
+        assert.equal(emptyByteCode, 0x0, "Contract bytecode should be 0x0.")
+    })
 })
