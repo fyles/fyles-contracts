@@ -245,4 +245,28 @@ contract('FileStorage', function ([owner]) {
         assert.equal(storedFileHashCount, 2, "File hash count should be 2.")
         assert.equal(storedFileMetadataCount, 2, "File metadata count should be 2.")
     })
+
+    /**
+     * Test ability to self destruct
+     */
+    it('self destructs the contract', async function() {
+        let contractByteCode = await web3.eth.getCode(fs.address)
+        await fs.kill()
+        let emptyByteCode = await web3.eth.getCode(fs.address)
+        assert.notEqual(contractByteCode, emptyByteCode, "Previous and current contract bytecode should not be equal.")
+        assert.equal(emptyByteCode, 0x0, "Contract bytecode should be 0x0.")
+    })
+
+    /**
+     * Test revert in fallback function
+     */
+    it('reverts eth transferred to contract', async function() {
+        try {
+            await fs.sendTransaction({ value: 1e+18, from: owner })
+        } catch (err) {
+            assert(err.toString().includes('revert'), err.toString())
+        }
+        let balance = await web3.eth.getBalance(fs.address)
+        assert.equal(balance.toNumber(), 0, "Balance should be 0.")
+    })
 })
