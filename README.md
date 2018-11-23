@@ -2,7 +2,7 @@
 
 Smart contracts for fyles, an IPFS-backed public filestore with support for Proof of Existence.
 
-[![Build Status](https://travis-ci.com/marcdown/fyles-contracts.svg?branch=master)](https://travis-ci.com/marcdown/fyles-contracts)
+[![Build Status](https://travis-ci.org/marcdown/fyles-contracts.svg?branch=master)](https://travis-ci.org/marcdown/fyles-contracts)
 [![Coverage Status](https://coveralls.io/repos/github/marcdown/fyles-contracts/badge.svg?branch=master)](https://coveralls.io/github/marcdown/fyles-contracts?branch=master)
 
 ## About
